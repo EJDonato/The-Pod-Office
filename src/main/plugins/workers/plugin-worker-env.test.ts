@@ -11,6 +11,13 @@ describe('buildPluginWorkerEnv', () => {
     ).toEqual({ PATH: '/safe', HOME: '/home', ELECTRON_RUN_AS_NODE: '1' })
   })
 
+  it('keeps the profile path so a worker CLI call reaches the app that spawned it', () => {
+    expect(buildPluginWorkerEnv({ ORCA_USER_DATA_PATH: '/profile' }, 'linux')).toEqual({
+      ORCA_USER_DATA_PATH: '/profile',
+      ELECTRON_RUN_AS_NODE: '1'
+    })
+  })
+
   it('matches Windows environment keys case-insensitively', () => {
     expect(buildPluginWorkerEnv({ Path: 'C:\\safe', systemroot: 'C:\\Windows' }, 'win32')).toEqual({
       PATH: 'C:\\safe',

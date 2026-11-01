@@ -8,6 +8,8 @@ const WORKER_ENV_ALLOWLIST = [
   'LC_ALL',
   'LC_CTYPE',
   'TZ',
+  // Without it, a worker's `orca` CLI call reaches the default profile, not the app that spawned it.
+  'ORCA_USER_DATA_PATH',
   'TMPDIR',
   'TEMP',
   'TMP',
